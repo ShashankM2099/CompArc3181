@@ -1,0 +1,76 @@
+# Task 3: Reverse Array
+# Your goal for this task is to reverse an array
+# of integers (in place).
+
+# The array will be stored in memory
+# The location of arr[0] is SP
+# The location of arr[1] is SP+1
+# The location of arr[2] is SP+2
+# ... and so on
+
+# The size of the array N will be stored in SP-1
+
+# The SP register may be initialized to any value
+2: 1024; # Initialize the SP register to 1024 (start of the array)
+# ALL other non-constant registers will be initialized to 0
+# regardless of any initializers you use.
+
+[1023]: 8; # N = 8 - the array has 8 elements
+
+[1024]: 1;  # arr[0] = 1
+[1025]: -2; # arr[1] = -2
+[1026]: 8;  # arr[2] = 8
+[1027]: 12; # arr[3] = 12
+[1028]: -5; # arr[4] = -5
+[1029]: 0;  # arr[5] = 0
+[1030]: 5;  # arr[6] = 5
+[1031]: 3;  # arr[7] = 3
+
+# Goal:
+#
+# [1024]: 3;
+# [1025]: 5;
+# [1026]: 0;
+# [1027]: -5;
+# [1028]: 12;
+# [1029]: 8;
+# [1030]: -2;
+# [1031]: 1;
+#
+
+# Start your code here
+E: 1023;
+SA E;
+RDL
+RB F;
+A: 1031;
+
+LBL start_loop;
+MV D,B;
+NOT C,D;
+ADD C, 6;
+ADD C, F;
+SF C;
+BIZ END_LOOP;
+SA 2;
+RD;
+RB 8;
+SA A;
+RD;
+RB 9;
+
+SA A;
+SB 8;
+WR;
+WR;
+
+SA 2;
+SB 9;
+WR;
+
+AD B,6;
+ADD 2,6;
+ADD A, 7;
+GO start_loop;
+LBL END_LOOP;
+
